@@ -28,9 +28,9 @@ builder.Services.AddScoped<IDbConnection>(provider =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend", policy =>
+    options.AddPolicy("AllowNetlify", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("https://ticketingsystemapplication.netlify.app")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -62,7 +62,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors("AllowFrontend");
+app.UseCors("AllowNetlify");
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
