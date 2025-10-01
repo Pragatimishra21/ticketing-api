@@ -4,7 +4,7 @@ using TicketingSystem.Services.Interface;
 using TicketingSystem.Services;
 using TicketingSystem.Repositories.Interface;
 using TicketingSystem.Repositories;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
