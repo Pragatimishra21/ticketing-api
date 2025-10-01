@@ -9,8 +9,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Copy the csproj and restore dependencies
-COPY ticketing-api/TicketingService_API/TicketingSystem/TicketingSystem.csproj \
-     TicketingService_API/TicketingSystem/
+COPY TicketingService_API/TicketingSystem/TicketingSystem.csproj TicketingService_API/TicketingSystem/
 RUN dotnet restore TicketingService_API/TicketingSystem/TicketingSystem.csproj
 
 # Copy all source files
@@ -18,7 +17,7 @@ COPY . .
 
 WORKDIR /src/TicketingService_API/TicketingSystem
 
-# Publish the project to /app/publish
+# Publish the project
 RUN dotnet publish TicketingSystem.csproj -c Release -o /app/publish
 
 # Final image
@@ -28,7 +27,7 @@ WORKDIR /app
 # Copy published files
 COPY --from=build /app/publish .
 
-# Make Kestrel listen on Railway assigned port
+# Listen on Railway assigned port
 ENV ASPNETCORE_URLS=http://+:$PORT
 
 # Run the API
